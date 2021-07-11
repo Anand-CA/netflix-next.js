@@ -50,12 +50,14 @@ function Row({ title, movies, big }) {
               <div>
                 <p
                   className={`text-white ${
-                    big ? "text-3xl" : "text-lg"
+                    big ? "sm:text-3xl text-lg" : "text-md sm:text-lg"
                   } font-semibold`}
                 >
-                  {a.title || a.original_title}
+                  {a.original_name || a.title}
                 </p>
-                <p className="line-clamp-2 sm:text-base text-xs">{a.overview}</p>
+                <p className="line-clamp-2 sm:text-base text-xs">
+                  {a.overview}
+                </p>
               </div>
             </div>
           </div>

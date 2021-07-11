@@ -38,7 +38,7 @@ export default function Banner({ movies }) {
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="text-white font-semibold text-2xl sm:text-5xl"
               >
-                {m?.title}
+                {m?.original_name || m.name}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}

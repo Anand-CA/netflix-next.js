@@ -16,6 +16,7 @@ export default function Home({
   romance,
   documentary,
 }) {
+  console.log("trending movies 👨 ", trending);
   const session = useSession();
   if (!session[0]?.user) {
     return <Login />;
