@@ -6,10 +6,10 @@
 Not the ordinary spotify clone that you'll find on internet. This one will extremely load faster because it uses server side rendering. This is my first project on next.js and hopping to built more with it. Due to some restrictions i couldn't add authentication and redux but will be adding it sooner. If you like this clone give it a start⭐️
 
 ## Technologies used 🚀
-* next.js
-* tailwind css
-* tmdb api
-
+* [Next.js](https://nextjs.org/)
+* [TailwindCss](https://tailwindcss.com/)
+* [TmdbApi](https://www.themoviedb.org/)
+* [Framer-motion](https://www.framer.com/)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
