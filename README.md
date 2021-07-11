@@ -1,5 +1,6 @@
 # [LIVE DEMO](https://netflixclone-three.vercel.app/)
 
+### [NetflixClone](https://i.ibb.co/BPGPH99/Screen-Shot-2021-07-11-at-4-37-40-PM.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
