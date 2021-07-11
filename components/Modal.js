@@ -51,13 +51,13 @@ function Modal({ show, setShow, id }) {
         display: `${show ? "flex" : "none"}`,
         backgroundColor: "rgba(0,0,0,0.7",
       }}
-      className="px-3 text-white flex items-center justify-center fixed z-50 top-0 left-0 right-0 bottom-0 "
+      className="px-3 text-white  flex items-center justify-center fixed z-50 top-0 left-0 right-0 bottom-0 "
     >
       {/* container */}
       <motion.div
         variants={variants}
         animate={show ? "visible" : "hidden"}
-        className="w-full max-w-3xl  rounded-lg p-4 bg-[#121212]"
+        className="w-full max-w-3xl text-left flex flex-col rounded-lg p-4 bg-[#121212]"
       >
         <button
           onClick={() => {
@@ -65,9 +65,11 @@ function Modal({ show, setShow, id }) {
             setShow(false);
           }}
         >
-          <MdClose className=" text-3xl" />
+          <MdClose className="mb-4 text-3xl" />
         </button>
         <ReactPlayer
+          controls
+          width="100%"
           playing={playing}
           onStart={() => setPlaying(true)}
           onEnded={() => setPlaying(false)}
@@ -75,7 +77,7 @@ function Modal({ show, setShow, id }) {
         />
 
         <h1 className="py-3 font-semibold text-4xl">{movie.title}</h1>
-        <p>{movie?.overview}</p>
+        <p className="text-gray-300">{movie?.overview}</p>
         <div className="h-0.5 my-3 bg-gray-300" />
         <p className="text-gray-400 text-xs">
           <span>Rating:</span> {movie?.vote_average}

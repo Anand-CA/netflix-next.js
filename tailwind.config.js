@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
-        "fade-in-up": {
+        fadeUp: {
           "0%": {
             opacity: "0",
             transform: "translateY(50px)",
@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       animation: {
-        "fade-in-up": "fade-in-up 0.5s ease-out",
+        fadeUp: "fadeUp 0.5s ease-out",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
@@ -31,7 +31,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      animation: ["hover", "group-hover"],
+    },
   },
   plugins: [
     require("tailwind-scrollbar-hide"),

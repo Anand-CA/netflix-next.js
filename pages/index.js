@@ -2,7 +2,25 @@ import Head from "next/head";
 import Row from "../components/Row";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
-export default function Home({ trending, action, netflix, topRated }) {
+import { getSession, useSession } from "next-auth/client";
+import Login from "../components/Login";
+import requests from "../requests";
+
+export default function Home({
+  trending,
+  action,
+  netflix,
+  topRated,
+  horror,
+  comedy,
+  romance,
+  documentary,
+}) {
+  const session = useSession();
+  if (!session[0]?.user) {
+    return <Login />;
+  }
+
   return (
     <div className="">
       <Head>
@@ -15,40 +33,75 @@ export default function Home({ trending, action, netflix, topRated }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-      <Banner movies={action.results} />
+      <Header user={session?.user} />
+      <Banner movies={netflix.results} />
 
       {/* movies */}
       <div className="">
-        <Row title="Trending" movies={trending.results} />
+        <Row title="Trending" movies={trending.results} big={true} />
         <Row title="Action movies" movies={action.results} />
-        <Row title="Netflix originals" movies={netflix.results} />
         <Row title="Top rated" movies={topRated.results} />
+        <Row title="Horror " movies={horror.results} />
+        <Row title="Comedy" movies={comedy.results} />
+        <Row title="Romance" movies={romance.results} />
+        <Row title="Documentaries" movies={documentary.results} />
       </div>
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  const [trendingRes, actionRes, netflixRes, topRatedRes] = await Promise.all([
-    fetch(
-      `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.API_KEY}&language=en-US`
-    ),
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&with_genres=28`
-    ),
-    fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.API_KEY}&witg_network=213`
-    ),
-    fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US`
-    ),
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  const [
+    trendingRes,
+    actionRes,
+    netflixRes,
+    topRatedRes,
+    horrorRes,
+    comedyRes,
+    romanceRes,
+    documentaryRes,
+  ] = await Promise.all([
+    fetch(`https://api.themoviedb.org/3${requests.fetchTrending}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchActionMovies}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchNetflixOriginals}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchTopRated}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchHorrorMovies}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchComedyMovies}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchRomanceMovies}`),
+    fetch(`https://api.themoviedb.org/3${requests.fetchDocumentaries}`),
   ]);
-  const [trending, action, netflix, topRated] = await Promise.all([
+  const [
+    trending,
+    action,
+    netflix,
+    topRated,
+    horror,
+    comedy,
+    romance,
+    documentary,
+  ] = await Promise.all([
     trendingRes.json(),
     actionRes.json(),
     netflixRes.json(),
     topRatedRes.json(),
+    horrorRes.json(),
+    comedyRes.json(),
+    romanceRes.json(),
+    documentaryRes.json(),
   ]);
-  return { props: { trending, action, netflix, topRated } };
+  return {
+    props: {
+      trending,
+      action,
+      netflix,
+      topRated,
+      horror,
+      comedy,
+      romance,
+      documentary,
+      session,
+    },
+  };
 }
