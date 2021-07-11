@@ -19,7 +19,7 @@ export default function Home({
   return (
     <div className="">
       <Head>
-        <title>Create Next App</title>
+        <title>Spotify 2.0</title>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter"
           rel="stylesheet"
