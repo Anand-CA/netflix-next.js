@@ -57,7 +57,7 @@ function Modal({ show, setShow, id }) {
       <motion.div
         variants={variants}
         animate={show ? "visible" : "hidden"}
-        className="w-full max-w-3xl text-left flex flex-col rounded-lg p-4 bg-[#121212]"
+        className="w-full scrollbar-hide overflow-y-scroll sm:h-content h-5/6 max-w-3xl text-left flex flex-col rounded-lg p-4 bg-[#121212]"
       >
         <button
           onClick={() => {

@@ -1,12 +1,10 @@
-import { signOut, useSession } from "next-auth/client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsCollectionPlay } from "react-icons/bs";
 
 function Header() {
   const [show, setShow] = useState(false);
-  const session = useSession();
-  console.log("session .....", session);
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
@@ -36,10 +34,9 @@ function Header() {
         <BsCollectionPlay className="text-white text-2xl" />
       </div>
       <Image
-        onClick={() => signOut()}
         width={40}
         height={40}
-        src={session[0]?.user?.image}
+        src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
       />
     </div>
   );

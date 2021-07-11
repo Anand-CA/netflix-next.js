@@ -2,8 +2,6 @@ import Head from "next/head";
 import Row from "../components/Row";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
-import { getSession, useSession } from "next-auth/client";
-import Login from "../components/Login";
 import requests from "../requests";
 
 export default function Home({
@@ -17,10 +15,6 @@ export default function Home({
   documentary,
 }) {
   console.log("trending movies 👨 ", trending);
-  const session = useSession();
-  if (!session[0]?.user) {
-    return <Login />;
-  }
 
   return (
     <div className="">
@@ -34,7 +28,7 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header user={session?.user} />
+      <Header  />
       <Banner movies={netflix.results} />
 
       {/* movies */}
@@ -51,9 +45,7 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
+export async function getStaticProps() {
   const [
     trendingRes,
     actionRes,
@@ -102,7 +94,6 @@ export async function getServerSideProps(context) {
       comedy,
       romance,
       documentary,
-      session,
     },
   };
 }

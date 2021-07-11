@@ -23,6 +23,7 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       height: {
+        content:'fit-content',
         xl: "50vh",
       },
       colors: {
