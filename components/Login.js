@@ -4,7 +4,7 @@ import React from "react";
 function Login() {
   return (
     <div>
-      <div>Login component</div>
+      <div>Login </div>
       <button onClick={() => signIn()}>Sign in </button>
     </div>
   )
