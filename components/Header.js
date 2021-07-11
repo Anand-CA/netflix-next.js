@@ -35,7 +35,7 @@ function Header() {
       <div className="cursor-pointer mr-5">
         <BsCollectionPlay className="text-white text-2xl" />
       </div>
-      <img
+      <Image
         onClick={() => signOut()}
         width={40}
         height={40}

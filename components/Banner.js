@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper/core";
+import Image from "next/image";
 
 SwiperCore.use([Autoplay]);
 
@@ -23,12 +24,14 @@ export default function Banner({ movies }) {
         })
         .map((m) => (
           <SwiperSlide key={m.id} className="">
-            <img
+            <Image
+              layout="fill"
               className="absolute w-full h-full object-cover"
               src={`https://image.tmdb.org/t/p/original${
                 m.backdrop_path || m.poster_path
               }`}
-              alt=""
+              alt="banner__image"
+              loading="eager"
             />
             <div className="bg-gradient-to-t from-black absolute h-20 left-0 right-0 bottom-0"></div>
             <div className="absolute bottom-8 left-2 sm:left-8">
