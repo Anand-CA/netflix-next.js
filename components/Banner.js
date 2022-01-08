@@ -6,15 +6,13 @@ import Image from "next/image";
 SwiperCore.use([Autoplay]);
 
 export default function Banner({ movies }) {
-  console.log("banner", movies);
-
   return (
     <Swiper
       autoplay={{
-        delay: 3000,
+        delay: 5000,
         disableOnInteraction: false,
       }}
-      className="relative h-xl"
+      className="relative md:h-[60vh] h-[50vh]"
     >
       {movies
         ?.filter((m) => {

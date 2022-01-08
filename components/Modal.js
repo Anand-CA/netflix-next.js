@@ -7,39 +7,39 @@ function Modal({ show, setShow, id }) {
   const [movie, setMovie] = useState({});
   const [trailerId, setTrailerId] = useState(null);
   const [playing, setPlaying] = useState(false);
-  console.log(playing);
-  console.log(id);
+
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchMovie() {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=9c581c41f799139adb8ddf77aa9fade2&language=en-US`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=9c581c41f799139adb8ddf77aa9fade2&language=en-US`,
+        { signal: controller.signal }
       );
       const data = await res.json();
       setMovie(data);
     }
     fetchMovie();
     getYtvideo(id);
+
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
-  const opts = {
-    height: "450",
-    width: "100%",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
   const getYtvideo = async (id) => {
+    const controller = new AbortController();
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=9c581c41f799139adb8ddf77aa9fade2&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=9c581c41f799139adb8ddf77aa9fade2&language=en-US`,
+      {
+        signal: controller.signal,
+      }
     );
     const data = await res.json();
-    console.log("yt >>>", data);
     if (data.id) {
       setTrailerId(data?.results[0]?.key);
     }
   };
-  console.log(movie);
+
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 1 },
@@ -63,6 +63,7 @@ function Modal({ show, setShow, id }) {
           onClick={() => {
             setPlaying(false);
             setShow(false);
+            setMovie({});
           }}
         >
           <MdClose className="mb-4 text-3xl" />

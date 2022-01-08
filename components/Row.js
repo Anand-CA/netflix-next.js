@@ -12,11 +12,11 @@ function Row({ title, movies, big }) {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="">
       <Modal show={show} setShow={setShow} id={id} />
       <h1 className="font-bold text-xl sm:text-3xl p-3">{title}</h1>
-      <div className="sm:px-5 py-1 flex overflow-y-hidden overflow-x-scroll scrollbar-hide">
+      <div className="p-3 sm:p-5 flex gap-5 overflow-y-hidden overflow-x-scroll scrollbar-hide">
         {movies?.map((a) => (
           <div
             key={a.id}
-            className="group m-3 hover:scale-110  relative transition-all duration-500"
+            className="group hover:sm:mx-5 hover:scale-105 relative transition-all duration-500"
           >
             <Image
               layout="fixed"

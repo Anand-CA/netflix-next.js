@@ -14,8 +14,6 @@ export default function Home({
   romance,
   documentary,
 }) {
-  console.log("trending movies 👨 ", trending);
-
   return (
     <div className="">
       <Head>
@@ -28,7 +26,7 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header  />
+      <Header />
       <Banner movies={netflix.results} />
 
       {/* movies */}
@@ -45,7 +43,7 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   const [
     trendingRes,
     actionRes,
