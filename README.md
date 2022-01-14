@@ -3,7 +3,7 @@
 ![NetflixClone](https://i.ibb.co/BPGPH99/Screen-Shot-2021-07-11-at-4-37-40-PM.png)
 
 ## About
-Not the ordinary spotify clone that you'll find on internet. This one will extremely load faster because it uses server side rendering. This is my first project on next.js and hopping to built more with it. Due to some restrictions i couldn't add authentication and redux but will be adding it sooner. If you like this clone give it a start⭐️
+Not the ordinary Netflix clone that you'll find on internet. This one will extremely load faster because it uses server side rendering. This is my first project on next.js and hopping to built more with it. Due to some restrictions i couldn't add authentication and redux but will be adding it sooner. If you like this clone give it a start⭐️
 
 ## Technologies used 🚀
 * [Next.js](https://nextjs.org/)
