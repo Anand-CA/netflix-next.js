@@ -2,8 +2,25 @@ import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper/core";
 import Image from "next/image";
+import { BsFillPlayFill } from "react-icons/bs";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 SwiperCore.use([Autoplay]);
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 1 },
+};
 
 export default function Banner({ movies }) {
   return (
@@ -21,7 +38,7 @@ export default function Banner({ movies }) {
           }
         })
         .map((m) => (
-          <SwiperSlide key={m.id} className="">
+          <SwiperSlide key={m.id} className="flex items-center md:p-8 p-3">
             <Image
               layout="fill"
               className="absolute w-full h-full object-cover"
@@ -31,25 +48,52 @@ export default function Banner({ movies }) {
               alt="banner__image"
               loading="eager"
             />
-            <div className="bg-gradient-to-t from-black absolute h-20 left-0 right-0 bottom-0"></div>
-            <div className="absolute bottom-8 left-2 sm:left-8">
+            {/* fade bg */}
+            <div
+              className="absolute top-0 left-0 right-0 bottom-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, hsl(0, 0%, 0%) 100%)",
+              }}
+            />
+            {/* content */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col md:space-y-5 space-y-2"
+              // className="absolute bottom-12 left-2 space-y-5 sm:left-8"
+            >
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                variants={item}
                 className="text-white font-semibold text-2xl sm:text-5xl"
               >
                 {m?.original_name || m.name}
               </motion.h1>
+              <div className="flex items-center gap-4">
+                <motion.button
+                  variants={item}
+                  whileTap={{ scale: 0.9 }}
+                  className="bg-[#e50914] md:text-base text-sm md:py-2 py-1.5 md:px-5 px-3 flex items-center gap-1 rounded-[3px]"
+                >
+                  <BsFillPlayFill fontSize="1.2rem" />
+                  Play
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  variants={item}
+                  className="bg-[rgba(109,109,110,.7)] flex items-center gap-1 md:text-base text-sm md:py-2 py-1.5 md:px-5 px-3 rounded-[3px]"
+                >
+                  <IoMdInformationCircleOutline fontSize="1.2rem" /> More Info
+                </motion.button>
+              </div>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="my-3 max-w-2xl text-sm sm:text-base line-clamp-3"
+                variants={item}
+                className="max-w-2xl text-sm sm:text-base line-clamp-3"
               >
                 {m?.overview}
               </motion.p>
-            </div>
+            </motion.div>
           </SwiperSlide>
         ))}
     </Swiper>

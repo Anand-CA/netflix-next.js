@@ -3,6 +3,27 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import ReactPlayer from "react-player/youtube";
 
+const dropIn = {
+  hidden: {
+    y: "10vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "10vh",
+    opacity: 0,
+  },
+};
+
 function Modal({ show, setShow, id }) {
   const [movie, setMovie] = useState({});
   const [trailerId, setTrailerId] = useState(null);
@@ -23,6 +44,7 @@ function Modal({ show, setShow, id }) {
 
     return () => {
       controller.abort();
+      setMovie({});
     };
   }, [id]);
 
@@ -40,23 +62,19 @@ function Modal({ show, setShow, id }) {
     }
   };
 
-  const variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 1 },
-  };
-
   return (
-    <div
-      style={{
-        display: `${show ? "flex" : "none"}`,
-        backgroundColor: "rgba(0,0,0,0.7",
-      }}
-      className="px-3 text-white  flex items-center justify-center fixed z-50 top-0 left-0 right-0 bottom-0 "
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="px-3 text-white bg-[rgba(0,0,0,0.7]  flex items-center justify-center fixed z-50 top-0 left-0 right-0 bottom-0 "
     >
       {/* container */}
       <motion.div
-        variants={variants}
-        animate={show ? "visible" : "hidden"}
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
         className="w-full scrollbar-hide overflow-y-scroll sm:h-content h-5/6 max-w-3xl text-left flex flex-col rounded-lg p-4 bg-[#121212]"
       >
         <button
@@ -95,7 +113,7 @@ function Modal({ show, setShow, id }) {
             .join(", ")}
         </p>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 

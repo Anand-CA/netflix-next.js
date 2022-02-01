@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -10,13 +10,20 @@ function Row({ title, movies, big }) {
   const [id, setId] = useState(null);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="">
-      <Modal show={show} setShow={setShow} id={id} />
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+        onExitComplete={() => null}
+      >
+        {show && <Modal show={show} setShow={setShow} id={id} />}
+      </AnimatePresence>
+
       <h1 className="font-bold text-xl sm:text-3xl p-3">{title}</h1>
       <div className="p-3 sm:p-5 flex gap-5 overflow-y-hidden overflow-x-scroll scrollbar-hide">
-        {movies?.map((a) => (
+        {movies?.map((m) => (
           <div
-            key={a.id}
-            className="group hover:sm:mx-5 hover:scale-105 relative transition-all duration-500"
+            key={m.id}
+            className="group hover:mx-5 hover:scale-105 relative transition-all duration-500"
           >
             <Image
               layout="fixed"
@@ -24,9 +31,9 @@ function Row({ title, movies, big }) {
               width={big ? 400 : 300}
               height={big ? 300 : 200}
               src={`https://image.tmdb.org/t/p/original${
-                a.backdrop_path || a.poster_path
+                m.backdrop_path || m.poster_path
               }`}
-              alt={a.title}
+              alt={m.title}
             />
 
             {/* info */}
@@ -34,7 +41,7 @@ function Row({ title, movies, big }) {
               <div className="flex space-x-3 items-center">
                 <motion.div
                   onClick={() => {
-                    setId(a.id);
+                    setId(m.id);
                     setShow(true);
                   }}
                   whileTap={{ scale: 0.9 }}
@@ -53,10 +60,10 @@ function Row({ title, movies, big }) {
                     big ? "sm:text-3xl text-lg" : "text-md sm:text-lg"
                   } font-semibold`}
                 >
-                  {a.original_name || a.title}
+                  {m.original_name || m.title}
                 </p>
                 <p className="line-clamp-2 sm:text-base text-xs">
-                  {a.overview}
+                  {m.overview}
                 </p>
               </div>
             </div>
