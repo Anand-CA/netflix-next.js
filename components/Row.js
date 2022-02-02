@@ -8,6 +8,7 @@ import { useState } from "react";
 function Row({ title, movies, big }) {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(null);
+
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="">
       <AnimatePresence
@@ -18,8 +19,8 @@ function Row({ title, movies, big }) {
         {show && <Modal show={show} setShow={setShow} id={id} />}
       </AnimatePresence>
 
-      <h1 className="font-bold text-xl sm:text-3xl p-3">{title}</h1>
-      <div className="p-3 sm:p-5 flex gap-5 overflow-y-hidden overflow-x-scroll scrollbar-hide">
+      <h1 className="font-bold text-xl sm:text-3xl ml-3 sm:ml-7">{title}</h1>
+      <div className="flex py-3 sm:px-7 px-3 gap-5 overflow-y-hidden overflow-x-scroll scrollbar-hide">
         {movies?.map((m) => (
           <div
             key={m.id}
@@ -28,10 +29,10 @@ function Row({ title, movies, big }) {
             <Image
               layout="fixed"
               className="object-cover transition-all duration-500 group-hover:opacity-50 rounded-lg"
-              width={big ? 400 : 300}
-              height={big ? 300 : 200}
+              width={big ? 250 : 300}
+              height={big ? 390 : 200}
               src={`https://image.tmdb.org/t/p/original${
-                m.backdrop_path || m.poster_path
+                big ? m.poster_path : m.backdrop_path
               }`}
               alt={m.title}
             />

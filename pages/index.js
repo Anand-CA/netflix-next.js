@@ -39,7 +39,7 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const [
     trendingRes,
     actionRes,
