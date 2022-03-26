@@ -1,4 +1,4 @@
-export const apiKey = process.env.API_KEY;
+export const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 const requests = {
   fetchTrending: `/trending/all/week?api_key=${apiKey}&language=en-US`,

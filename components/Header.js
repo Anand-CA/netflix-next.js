@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsCollectionPlay } from "react-icons/bs";
+import Link from "next/link";
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -30,9 +31,11 @@ function Header() {
         />
       </div>
 
-      <div className="cursor-pointer mr-5">
-        <BsCollectionPlay className="text-white text-2xl" />
-      </div>
+      <Link href="/mylist">
+        <div className="cursor-pointer mr-5">
+          <BsCollectionPlay className="text-white text-2xl" />
+        </div>
+      </Link>
       <Image
         width={40}
         height={40}

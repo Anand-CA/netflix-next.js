@@ -89,7 +89,7 @@ export default function Banner({ movies }) {
               </div>
               <motion.p
                 variants={item}
-                className="max-w-2xl text-sm sm:text-base line-clamp-3"
+                className="max-w-2xl text-sm sm:text-xl line-clamp-3"
               >
                 {m?.overview}
               </motion.p>

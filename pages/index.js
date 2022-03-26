@@ -3,6 +3,7 @@ import Row from "../components/Row";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import requests from "../requests";
+import { AnimatePresence } from "framer-motion";
 
 export default function Home({
   trending,
