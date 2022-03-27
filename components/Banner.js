@@ -33,7 +33,7 @@ export default function Banner({ movies }) {
     >
       {movies
         ?.filter((m) => {
-          if (m.backdrop_path) {
+          if (m.backdrop_path && m.overview) {
             return m;
           }
         })

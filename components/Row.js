@@ -6,6 +6,19 @@ import Modal from "./Modal";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styled from "styled-components";
+import SwiperCore, { Autoplay, Navigation } from "swiper/core";
+
+SwiperCore.use([Autoplay, Navigation]);
+const contentVariants = {
+  rest: { opacity: 0, y: -20 },
+  hover: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+    },
+  },
+};
 
 function Row({ title, movies, big }) {
   const [show, setShow] = useState(false);
@@ -21,16 +34,14 @@ function Row({ title, movies, big }) {
         {show && <Modal show={show} setShow={setShow} id={id} />}
       </AnimatePresence>
 
-      <SwiperContainer
-        style={{
-          padding: big ? "1.5% 2rem 4.5% 2rem" : "0 2rem 2% 2rem",
-        }}
-      >
+      <SwiperContainer>
         <h1 className="font-bold text-xl sm:text-2xl mb-3">{title}</h1>
         <StyledSwiper
           big={big}
           spaceBetween={2}
           slidesPerView={6}
+          navigation
+          slidesPerGroup={6}
           breakpoints={{
             // when window width is >= 320px
             320: {
@@ -57,47 +68,52 @@ function Row({ title, movies, big }) {
         >
           {movies.map((m) => {
             return (
-              <SwiperSlide className="group" key={m.id}>
-                <Image
-                  className="rounded-md"
-                  layout="responsive"
-                  height={big ? 390 : 200}
-                  width={big ? 250 : 300}
-                  src={`https://image.tmdb.org/t/p/original${
-                    big ? m.poster_path : m.backdrop_path
-                  }`}
-                  objectFit="cover"
-                  alt={m.title}
-                />
+              <SwiperSlide className="" key={m.id}>
+                <Card initial="rest" whileHover="hover" animate="rest">
+                  <Image
+                    className="rounded-md"
+                    layout="responsive"
+                    height={big ? 390 : 200}
+                    width={big ? 250 : 300}
+                    src={`https://image.tmdb.org/t/p/original${
+                      big ? m.poster_path : m.backdrop_path
+                    }`}
+                    objectFit="cover"
+                    alt={m.title}
+                  />
 
-                <div className="group-hover:flex group-hover:animation-fadeUp flex-col duration-1000  hidden absolute bottom-3  left-3">
-                  <div className="flex space-x-3 items-center">
-                    <motion.div
-                      onClick={() => {
-                        setId(m.id);
-                        setShow(true);
-                      }}
-                      whileTap={{ scale: 0.9 }}
-                      className="bg-white w-8 h-8 flex rounded-full items-center justify-center"
-                    >
-                      <BsFillPlayFill className="ml-0.5 text-black text-xl" />
-                    </motion.div>
-                    <div>
-                      <AiOutlinePlusCircle className="text-2xl" />
+                  <motion.div
+                    variants={contentVariants}
+                    className="flex-col absolute bottom-3  left-3"
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <motion.div
+                        onClick={() => {
+                          setId(m.id);
+                          setShow(true);
+                        }}
+                        whileTap={{ scale: 0.9 }}
+                        className="bg-white w-8 h-8 flex rounded-full items-center justify-center"
+                      >
+                        <BsFillPlayFill className="ml-0.5 text-black text-xl" />
+                      </motion.div>
+                      <div>
+                        <AiOutlinePlusCircle className="text-2xl" />
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <p
-                      className={`text-white ${
-                        big ? "sm:text-md text-lg" : "text-md sm:text-lg"
-                      } font-semibold line-clamp-1`}
-                    >
-                      {m.original_name || m.title}
-                    </p>
-                    <p className="line-clamp-2 text-[.7rem]">{m.overview}</p>
-                  </div>
-                </div>
+                    <div>
+                      <p
+                        className={`text-white ${
+                          big ? "sm:text-md text-lg" : "text-md sm:text-lg"
+                        } font-semibold line-clamp-1`}
+                      >
+                        {m.original_name || m.title}
+                      </p>
+                      <p className="line-clamp-2 text-[.7rem]">{m.overview}</p>
+                    </div>
+                  </motion.div>
+                </Card>
               </SwiperSlide>
             );
           })}
@@ -110,7 +126,11 @@ function Row({ title, movies, big }) {
 export default Row;
 
 const SwiperContainer = styled.div`
-  overflow-x: hidden;
+  padding: 2em 2em;
+
+  @media (max-width: 768px) {
+    padding: 1em 1em;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -118,17 +138,31 @@ const StyledSwiper = styled(Swiper)`
   /* navigation */
   .swiper-button-next,
   .swiper-button-prev {
-    transform: scale(0.6);
-    background: rgba(0, 0, 0, 0.5);
+    transform: scale(0.5);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 50%;
     width: 4.3rem;
     height: 4.3rem;
+    color: red;
+    opacity: 0;
   }
+  /* swiper btn not active */
+  .swiper-button-next.swiper-button-disabled,
+  .swiper-button-prev.swiper-button-disabled {
+    display: none;
+  }
+
   .swiper-slide {
+    z-index: 10;
+    overflow: visible;
     transition: transform 0.2s ease-out, opacity 0.2s ease-out;
   }
 
   &:hover {
+    .swiper-button-next,
+    .swiper-button-prev {
+      opacity: 1;
+    }
     .swiper-slide {
       transform: translateX(-15%);
       opacity: 0.5;
@@ -137,7 +171,7 @@ const StyledSwiper = styled(Swiper)`
 
       &:first-child {
         &:hover {
-          transform: scale(1.3) translateX(15%);
+          transform: scale(1.3) translateX(12%);
           opacity: 1;
 
           ~ .swiper-slide {
@@ -159,3 +193,8 @@ const StyledSwiper = styled(Swiper)`
 `;
 
 export const Content = styled.div``;
+
+const Card = styled(motion.div)`
+  position: relative;
+  overflow: visible;
+`;
