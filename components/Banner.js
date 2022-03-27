@@ -4,22 +4,14 @@ import SwiperCore, { Autoplay } from "swiper/core";
 import Image from "next/image";
 import { BsFillPlayFill } from "react-icons/bs";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { banner } from "../utils/motion";
 
 SwiperCore.use([Autoplay]);
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
 
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 1 },
+  exit: { opacity: 0, y: -20 },
 };
 
 export default function Banner({ movies }) {
@@ -29,6 +21,7 @@ export default function Banner({ movies }) {
         delay: 5000,
         disableOnInteraction: false,
       }}
+      onSlideChange={() => {}}
       className="relative md:h-[60vh] h-[50vh]"
     >
       {movies
@@ -58,9 +51,10 @@ export default function Banner({ movies }) {
             />
             {/* content */}
             <motion.div
-              variants={container}
+              variants={banner}
               initial="hidden"
               animate="show"
+              exit="exit"
               className="flex flex-col md:space-y-5 space-y-2"
               // className="absolute bottom-12 left-2 space-y-5 sm:left-8"
             >

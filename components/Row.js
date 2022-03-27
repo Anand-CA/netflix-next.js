@@ -25,7 +25,12 @@ function Row({ title, movies, big }) {
   const [id, setId] = useState(null);
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+      className=""
+    >
       <AnimatePresence
         initial={false}
         exitBeforeEnter={true}

@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import Header from "../components/Header";
 import requests from "../requests";
 import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Home({
   trending,
@@ -16,18 +17,19 @@ export default function Home({
   documentary,
 }) {
   return (
-    <div className="">
+    <>
       <Head>
-        <title>Netflix 2.0</title>
+        <title>Home</title>
         <meta name="description" content="netflix home page" />
         <link rel="icon" href="/netflix-icon.svg" />
       </Head>
 
       <Header />
+
       <Banner movies={netflix.results} />
 
       {/* movies */}
-      <div className="">
+      <>
         <Row title="Trending" movies={trending.results} big={true} />
         <Row title="Action movies" movies={action.results} />
         <Row title="Top rated" movies={topRated.results} />
@@ -35,8 +37,8 @@ export default function Home({
         <Row title="Comedy" movies={comedy.results} />
         <Row title="Romance" movies={romance.results} />
         <Row title="Documentaries" movies={documentary.results} />
-      </div>
-    </div>
+      </>
+    </>
   );
 }
 

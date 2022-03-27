@@ -14,9 +14,6 @@ function Header() {
         setShow(false);
       }
     });
-    return () => {
-      window.removeEventListener("scroll");
-    };
   }, []);
   return (
     <div
