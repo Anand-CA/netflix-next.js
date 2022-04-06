@@ -161,13 +161,13 @@ function Modal({ show, setShow, id }) {
             variants={item}
             className="text-gray-400 sm:text-sm text-xs"
           >
-            <span>Rating:</span> {movie?.vote_average}
+            <span>Rating⭐:</span> {movie?.vote_average}
           </motion.p>
           <motion.p
             variants={item}
             className="sm:text-sm text-xs text-gray-400"
           >
-            <span className="">Release data:</span> {movie?.release_date}
+            <span className="">Release date📅:</span> {movie?.release_date}
           </motion.p>
           <motion.p
             variants={item}
