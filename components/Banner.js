@@ -22,7 +22,7 @@ export default function Banner({ movies }) {
         disableOnInteraction: false,
       }}
       onSlideChange={() => {}}
-      className="relative md:h-[60vh] h-[50vh]"
+      className="relative h-[70vh]"
     >
       {movies
         ?.filter((m) => {
