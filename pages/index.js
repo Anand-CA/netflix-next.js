@@ -29,7 +29,7 @@ export default function Home({
       <Banner movies={netflix.results} />
 
       {/* movies */}
-      <>
+      <div className="overflow-hidden">
         <Row title="Trending" movies={trending.results} big={true} />
         <Row title="Action movies" movies={action.results} />
         <Row title="Top rated" movies={topRated.results} />
@@ -37,7 +37,7 @@ export default function Home({
         <Row title="Comedy" movies={comedy.results} />
         <Row title="Romance" movies={romance.results} />
         <Row title="Documentaries" movies={documentary.results} />
-      </>
+      </div>
     </>
   );
 }
