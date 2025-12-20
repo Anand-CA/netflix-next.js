@@ -213,5 +213,5 @@ function Modal({ show, setShow, id }) {
     </motion.div>
   );
 }
-
+// 
 export default Modal;
