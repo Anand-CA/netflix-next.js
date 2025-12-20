@@ -78,7 +78,7 @@ export default function Home({
       <main className="relative pb-24 min-h-screen">
         {searchQuery ? (
           <div className="pt-32 px-[2%] space-y-12 min-h-screen">
-            <h2 className="text-3xl font-bold text-white/90">Results for "{searchQuery}"</h2>
+            <h2 className="text-3xl font-bold text-white/90">Results for &quot;{searchQuery}&quot;</h2>
             {searchResults.length > 0 ? (
               <Row onMovieClick={onMovieClick} title="" movies={searchResults} />
             ) : (

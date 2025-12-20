@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { HiSearch, HiBell, HiChevronLeft, HiChevronRight, HiX } from "react-icons/hi";
 
 function Navbar({ onSearch }) {
@@ -53,11 +54,14 @@ function Navbar({ onSearch }) {
                     </button>
 
                     <div className="flex items-center gap-3 pl-4 border-l border-white/10">
-                        <img
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100"
-                            alt="User"
-                            className="w-8 h-8 rounded-full border border-white/20"
-                        />
+                        <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden">
+                            <Image
+                                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100"
+                                alt="User"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
                         <span className="hidden md:block font-medium text-sm">Agung Hapsah</span>
                     </div>
                 </div>

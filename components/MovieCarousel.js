@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 function MovieCarousel({ movies, onMovieSelect, activeId }) {
     return (
@@ -13,10 +14,11 @@ function MovieCarousel({ movies, onMovieSelect, activeId }) {
                         className={`flex-shrink-0 relative w-64 aspect-video rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ${activeId === movie.id ? 'ring-2 ring-white/50 shadow-[0_0_30px_rgba(255,255,255,0.2)]' : 'opacity-60 grayscale-[0.5] hover:opacity-100 hover:grayscale-0'
                             }`}
                     >
-                        <img
+                        <Image
                             src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                            alt={movie.title}
-                            className="w-full h-full object-cover"
+                            alt={movie.title || "Movie Thumbnail"}
+                            layout="fill"
+                            objectFit="cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <p className="text-sm font-semibold truncate">{movie.title || movie.name}</p>

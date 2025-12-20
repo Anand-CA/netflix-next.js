@@ -25,10 +25,11 @@ function Header() {
           width={100}
           height={50}
           src="https://cdn.worldvectorlogo.com/logos/netflix-3.svg"
+          alt="Netflix Logo"
         />
       </div>
 
-      <Link href="/mylist">
+      <Link href="/mylist" passHref>
         <div className="cursor-pointer mr-5">
           <BsCollectionPlay className="text-white text-2xl" />
         </div>
@@ -37,6 +38,7 @@ function Header() {
         width={40}
         height={40}
         src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+        alt="User Avatar"
       />
     </div>
   );

@@ -104,11 +104,13 @@ function Modal({ show, setShow, id }) {
       >
         {/* Featured Header */}
         <div className="relative aspect-video w-full group">
-          <img
-            className={`w-full h-full object-cover transition-opacity duration-700 ${loading ? "opacity-0" : "opacity-100"}`}
+          <Image
+            className={`transition-opacity duration-700 ${loading ? "opacity-0" : "opacity-100"}`}
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
-            alt={movie.title}
-            onLoad={() => setLoading(false)}
+            alt={movie.title || "Movie Backdrop"}
+            layout="fill"
+            objectFit="cover"
+            onLoadingComplete={() => setLoading(false)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
 
