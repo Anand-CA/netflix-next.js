@@ -152,4 +152,7 @@ const StyledSwiper = styled(Swiper)`
 const Card = styled(motion.div)`
   position: relative;
   overflow: visible;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 `;

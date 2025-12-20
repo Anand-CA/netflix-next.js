@@ -13,7 +13,8 @@ function Hero({ movie }) {
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
                 }}
             >
-                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 <div className="absolute inset-0 hero-gradient" />
             </div>
 
@@ -52,10 +53,6 @@ function Hero({ movie }) {
                         <button className="btn-primary">
                             <HiPlay className="w-6 h-6" />
                             Watch Now
-                        </button>
-                        <button className="btn-secondary">
-                            <HiDownload className="w-5 h-5" />
-                            Download
                         </button>
                     </div>
                 </motion.div>

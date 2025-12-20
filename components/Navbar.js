@@ -1,12 +1,21 @@
-import { HiSearch, HiBell, HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { useState } from "react";
+import { HiSearch, HiBell, HiChevronLeft, HiChevronRight, HiX } from "react-icons/hi";
 
-function Navbar() {
+function Navbar({ onSearch }) {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+        onSearch?.(value);
+    };
+
     return (
         <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300">
             <div className="glass rounded-full px-6 py-3 flex items-center justify-between shadow-2xl">
                 {/* Left: Navigation Arrows */}
                 <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
+                    <div className="hidden sm:flex items-center gap-2">
                         <button className="p-2 rounded-full hover:bg-white/10 transition">
                             <HiChevronLeft className="w-5 h-5" />
                         </button>
@@ -20,9 +29,19 @@ function Navbar() {
                         <HiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition" />
                         <input
                             type="text"
+                            value={searchTerm}
+                            onChange={handleSearch}
                             placeholder="Search movies, shows..."
-                            className="bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 outline-none focus:bg-white/10 focus:border-white/20 transition-all w-64 md:w-96"
+                            className="bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-10 outline-none focus:bg-white/10 focus:border-white/20 transition-all w-48 sm:w-64 md:w-96"
                         />
+                        {searchTerm && (
+                            <button
+                                onClick={() => { setSearchTerm(""); onSearch?.(""); }}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition"
+                            >
+                                <HiX className="w-4 h-4" />
+                            </button>
+                        )}
                     </div>
                 </div>
 
