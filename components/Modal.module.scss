@@ -31,10 +31,28 @@
 }
 
 .backdrop {
-    transition: opacity 0.7s ease;
+    transition: opacity 1s ease;
+}
 
-    &.loading {
-        opacity: 0;
+.loadingPlaceholder {
+    position: absolute;
+    inset: 0;
+    background-color: #1a1a1a;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
     }
 }
 

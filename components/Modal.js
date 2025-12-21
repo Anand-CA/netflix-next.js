@@ -52,37 +52,67 @@ function Modal({ show, setShow, id }) {
     if (!id) return;
     const controller = new AbortController();
 
-    async function fetchMovie() {
+    async function fetchDetails() {
+      setLoading(true);
       try {
-        const res = await fetch(
+        // Try fetching as movie first
+        let res = await fetch(
           `https://api.tmdb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`,
           { signal: controller.signal }
         );
-        const data = await res.json();
+        let data = await res.json();
+
+        // If movie fetch fails or doesn't have a title, try fetching as TV show
+        if (data.success === false || (!data.title && !data.name)) {
+          res = await fetch(
+            `https://api.tmdb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`,
+            { signal: controller.signal }
+          );
+          data = await res.json();
+        }
+
+        console.log("Fetched data:", data);
         setMovie(data);
       } catch (err) {
-        console.error("Failed to fetch movie details:", err);
+        if (err.name !== "AbortError") {
+          console.error("Failed to fetch details:", err);
+        }
       }
     }
 
-    async function getYtvideo() {
+    async function getTrailer() {
       try {
-        const res = await fetch(
+        // Try movie videos first
+        let res = await fetch(
           `https://api.tmdb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`,
           { signal: controller.signal }
         );
-        const data = await res.json();
+        let data = await res.json();
+
+        // If no results, try TV videos
+        if (!data.results || data.results.length === 0) {
+          res = await fetch(
+            `https://api.tmdb.org/3/tv/${id}/videos?api_key=${apiKey}&language=en-US`,
+            { signal: controller.signal }
+          );
+          data = await res.json();
+        }
+
         const trailer = data?.results?.find(vid => vid.type === "Trailer" || vid.type === "Teaser");
         if (trailer) {
           setTrailerId(trailer.key);
+        } else {
+          setTrailerId(null);
         }
       } catch (err) {
-        console.error("Failed to fetch trailer:", err);
+        if (err.name !== "AbortError") {
+          console.error("Failed to fetch trailer:", err);
+        }
       }
     }
 
-    fetchMovie();
-    getYtvideo();
+    fetchDetails();
+    getTrailer();
 
     return () => {
       controller.abort();
@@ -117,14 +147,16 @@ function Modal({ show, setShow, id }) {
         <div className={styles.header}>
           {(movie.backdrop_path || movie.poster_path) && (
             <Image
-              className={`${styles.backdrop} ${loading ? styles.loading : ""}`}
+              className={styles.backdrop}
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
-              alt={movie.title || "Movie Backdrop"}
+              alt={movie.title || movie.name || "Backdrop"}
               layout="fill"
               objectFit="cover"
+              priority
               onLoadingComplete={() => setLoading(false)}
             />
           )}
+          {loading && <div className={styles.loadingPlaceholder} />}
           <div className={styles.backdropOverlay} />
 
           {/* Top Controls */}
@@ -146,7 +178,7 @@ function Modal({ show, setShow, id }) {
               animate={{ opacity: 1, y: 0 }}
               className={styles.title}
             >
-              {movie.title}
+              {movie.title || movie.name}
             </motion.h1>
 
             <div className={styles.mainActions}>
@@ -170,8 +202,8 @@ function Modal({ show, setShow, id }) {
           {/* Main Content */}
           <div className={styles.mainContent}>
             <div className={styles.metaRow}>
-              <span className={styles.match}>{Math.round(movie.vote_average * 10)}% Match</span>
-              <span className={styles.year}>{movie.release_date?.split("-")[0]}</span>
+              <span className={styles.match}>{movie.vote_average ? Math.round(movie.vote_average * 10) : 0}% Match</span>
+              <span className={styles.year}>{(movie.release_date || movie.first_air_date)?.split("-")[0]}</span>
               <span className={styles.hdBadge}>
                 HD
               </span>
