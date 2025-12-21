@@ -1,55 +1,54 @@
 import { motion } from "framer-motion";
-import { HiPlay, HiDownload } from "react-icons/hi";
+import { HiPlay } from "react-icons/hi";
+import styles from "./Hero.module.scss";
 
 function Hero({ movie }) {
     if (!movie) return null;
 
     return (
-        <div className="relative h-screen w-full flex items-center px-6 md:px-12 overflow-hidden">
+        <div className={styles.hero}>
             {/* Background with Blur */}
             <div
-                className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+                className={styles.background}
                 style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
                 }}
             >
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 <div className="absolute inset-0 hero-gradient" />
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-4xl mt-20">
+            <div className={styles.content}>
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-6"
+                    className={styles.stack}
                 >
-                    <span className="glass px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase">
+                    <span className={`${styles.badge} glass`}>
                         New Trending
                     </span>
 
-                    <div className="space-y-2">
-                        <h2 className="text-red-600 font-bold tracking-[0.2em] text-sm italic">NETFLIX</h2>
-                        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                    <div className={styles.titleArea}>
+                        <h2 className={styles.brand}>NETFLIX</h2>
+                        <h1 className={styles.title}>
                             {movie.title || movie.name}
                         </h1>
                     </div>
 
-                    <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed line-clamp-3">
+                    <p className={styles.overview}>
                         {movie.overview}
                     </p>
 
-                    <div className="flex flex-wrap gap-3">
+                    <div className={styles.genres}>
                         {["Action", "Adventure", "Animation"].map((genre) => (
-                            <span key={genre} className="glass px-4 py-1 rounded-full text-sm border-white/10">
+                            <span key={genre} className={`${styles.genreTag} glass`}>
                                 {genre}
                             </span>
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-4 pt-4">
+                    <div className={styles.actions}>
                         <button className="btn-primary">
                             <HiPlay className="w-6 h-6" />
                             Watch Now
@@ -59,7 +58,7 @@ function Hero({ movie }) {
             </div>
 
             {/* Overlay Glow */}
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-red-600/20 blur-[150px] rounded-full -mr-64 -mb-64 pointer-events-none" />
+            <div className={styles.glow} />
         </div>
     );
 }

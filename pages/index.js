@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Row from "../components/Row";
 import Modal from "../components/Modal";
+import styles from "../styles/Home.module.scss";
 
 export default function Home({
   trending,
@@ -66,7 +67,7 @@ export default function Home({
   }, [trending, searchQuery]);
 
   return (
-    <div className="relative min-h-screen bg-black text-white">
+    <div className={styles.container}>
       <Head>
         <title>Netflix - Premium</title>
         <meta name="description" content="Premium Netflix Redesign" />
@@ -75,14 +76,14 @@ export default function Home({
 
       <Navbar onSearch={handleSearch} />
 
-      <main className="relative pb-24 min-h-screen">
+      <main className={styles.main}>
         {searchQuery ? (
-          <div className="pt-32 px-[2%] space-y-12 min-h-screen">
-            <h2 className="text-3xl font-bold text-white/90">Results for &quot;{searchQuery}&quot;</h2>
+          <div className={styles.resultsContainer}>
+            <h2 className={styles.resultsTitle}>Results for &quot;{searchQuery}&quot;</h2>
             {searchResults.length > 0 ? (
               <Row onMovieClick={onMovieClick} title="" movies={searchResults} />
             ) : (
-              <p className="text-gray-400">No movies found. Try searching for something else.</p>
+              <p className={styles.noResults}>No movies found. Try searching for something else.</p>
             )}
           </div>
         ) : (
@@ -90,12 +91,12 @@ export default function Home({
             <Hero movie={activeMovie} />
 
             {/* First Row: Integrated with Hero */}
-            <div className="relative z-20 -mt-72 md:-mt-96 pb-12">
+            <div className={styles.trendingWrapper}>
               <Row onMovieClick={onMovieClick} title="Trending" movies={trending.results} />
             </div>
 
             {/* Remaining Rows: Glassmorphism Pane */}
-            <div className="relative z-20 space-y-10 glass-pane pt-16 pb-24">
+            <div className={`${styles.rowsContainer} glass-pane`}>
               <Row onMovieClick={onMovieClick} title="Action Movies" movies={action.results} />
               <Row onMovieClick={onMovieClick} title="Netflix Originals" movies={netflix.results} big={true} />
               <Row onMovieClick={onMovieClick} title="Top Rated" movies={topRated.results} />

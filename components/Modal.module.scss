@@ -1,0 +1,236 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+}
+
+.modal {
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 64rem;
+    max-height: 90vh;
+    border-radius: 2.5rem;
+    background-color: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 101;
+}
+
+.header {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+}
+
+.backdrop {
+    transition: opacity 0.7s ease;
+
+    &.loading {
+        opacity: 0;
+    }
+}
+
+.backdropOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0a0a0a, transparent, transparent);
+}
+
+.topControls {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.closeBtn {
+    padding: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    color: #fff;
+    transition: all 0.2s ease;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    svg {
+        font-size: 1.5rem;
+    }
+}
+
+.titleArea {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    right: 2.5rem;
+}
+
+.title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    margin-top: 0;
+
+    @media (min-width: 768px) {
+        font-size: 3.75rem;
+    }
+}
+
+.mainActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.infoGrid {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+
+    @media (min-width: 768px) {
+        padding: 3rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.mainContent {
+    @media (min-width: 768px) {
+        grid-column: span 2;
+    }
+
+    &>*+* {
+        margin-top: 1.5rem;
+    }
+}
+
+.metaRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.match {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.year {
+    color: #9ca3af;
+}
+
+.hdBadge {
+    padding: 0.125rem 0.375rem;
+    border: 1px solid #4b5563;
+    font-size: 10px;
+    color: #9ca3af;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
+
+.overview {
+    font-size: 1.125rem;
+    color: #e5e7eb;
+    line-height: 1.625;
+    font-weight: 300;
+    margin: 0;
+
+    @media (min-width: 768px) {
+        font-size: 1.25rem;
+    }
+}
+
+.sidebar {
+    font-size: 0.875rem;
+
+    &>*+* {
+        margin-top: 1.5rem;
+    }
+}
+
+.sidebarItem {
+    &>* {
+        margin: 0;
+    }
+}
+
+.sidebarLabel {
+    color: #6b7280;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.sidebarValue {
+    color: #e5e7eb;
+
+    &.uppercase {
+        text-transform: uppercase;
+    }
+}
+
+.playerOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.playerCloseBtn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    color: #fff;
+    z-index: 120;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    svg {
+        font-size: 1.5rem;
+    }
+}
+
+.playerWrapper {
+    width: 100%;
+    height: 100%;
+    max-width: 72rem;
+    aspect-ratio: 16 / 9;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}

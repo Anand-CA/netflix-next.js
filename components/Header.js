@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsCollectionPlay } from "react-icons/bs";
 import Link from "next/link";
+import styles from "./Header.module.scss";
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -18,9 +19,9 @@ function Header() {
   return (
     <div
       style={{ backgroundColor: `${show ? "black" : "transparent"}` }}
-      className="transition-all duration-1000 flex fixed z-50 top-0 w-full  items-center px-3"
+      className={styles.header}
     >
-      <div className="flex-1">
+      <div className={styles.logoWrapper}>
         <Image
           width={100}
           height={50}
@@ -30,7 +31,7 @@ function Header() {
       </div>
 
       <Link href="/mylist" passHref>
-        <div className="cursor-pointer mr-5">
+        <div className={styles.myList}>
           <BsCollectionPlay className="text-white text-2xl" />
         </div>
       </Link>

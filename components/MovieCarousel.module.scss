@@ -1,0 +1,65 @@
+.container {
+    position: relative;
+    width: 100%;
+    padding-left: 4%;
+    padding-right: 4%;
+    z-index: 20;
+}
+
+.scrollArea {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.card {
+    flex-shrink: 0;
+    position: relative;
+    width: 16rem;
+    aspect-ratio: 16 / 9;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    opacity: 0.6;
+    filter: grayscale(0.5);
+
+    &:hover {
+        opacity: 1;
+        filter: grayscale(0);
+    }
+
+    &.active {
+        opacity: 1;
+        filter: grayscale(0);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        outline: 2px solid rgba(255, 255, 255, 0.5); // ring-2 ring-white/50
+    }
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+
+    .card:hover & {
+        opacity: 1;
+    }
+}
+
+.title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}

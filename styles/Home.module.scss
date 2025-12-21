@@ -1,0 +1,55 @@
+.container {
+    position: relative;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+}
+
+.main {
+    position: relative;
+    padding-bottom: 2rem;
+    min-height: 100vh;
+}
+
+.resultsContainer {
+    padding-top: 8rem;
+    padding-left: 2%;
+    padding-right: 2%;
+    min-height: 100vh;
+
+    &>*+* {
+        margin-top: 3rem;
+    }
+}
+
+.resultsTitle {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.noResults {
+    color: #9ca3af;
+}
+
+.trendingWrapper {
+    position: relative;
+    z-index: 20;
+    margin-top: -18rem;
+    padding-bottom: 3rem;
+
+    @media (min-width: 768px) {
+        margin-top: -24rem;
+    }
+}
+
+.rowsContainer {
+    position: relative;
+    z-index: 20;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+
+    &>*+* {
+        margin-top: 2.5rem;
+    }
+}

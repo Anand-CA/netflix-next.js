@@ -1,0 +1,20 @@
+.header {
+    transition: all 1s ease;
+    display: flex;
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.logoWrapper {
+    flex: 1;
+}
+
+.myList {
+    cursor: pointer;
+    margin-right: 1.25rem;
+}

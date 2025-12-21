@@ -1,31 +1,30 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import { MdClose } from "react-icons/md";
 import { HiPlus, HiPlay } from "react-icons/hi";
 import ReactPlayer from "react-player/youtube";
 import Image from "next/image";
+import styles from "./Modal.module.scss";
 
 const dropIn = {
   hidden: {
-    y: "5vh",
     opacity: 0,
-    scale: 0.95,
+    scale: 0.9,
   },
   visible: {
-    y: "0",
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.4,
+      duration: 0.3,
       ease: [0.16, 1, 0.3, 1],
     },
   },
   exit: {
-    y: "5vh",
     opacity: 0,
-    scale: 0.95,
+    scale: 0.9,
     transition: {
-      duration: 0.3,
+      duration: 0.2,
     },
   },
 };
@@ -37,7 +36,17 @@ function Modal({ show, setShow, id }) {
   const [trailerId, setTrailerId] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+    document.body.style.overflow = "hidden";
+    return () => {
+      setMounted(false);
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -86,65 +95,69 @@ function Modal({ show, setShow, id }) {
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return ReactDOM.createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       ref={modalRef}
       onClick={closeModal}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto overflow-x-hidden pt-10 pb-10"
+      className={styles.overlay}
     >
       <motion.div
         variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="relative w-full max-w-5xl my-auto mx-auto rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl overflow-hidden"
+        className={styles.modal}
       >
         {/* Featured Header */}
-        <div className="relative aspect-video w-full group">
-          <Image
-            className={`transition-opacity duration-700 ${loading ? "opacity-0" : "opacity-100"}`}
-            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
-            alt={movie.title || "Movie Backdrop"}
-            layout="fill"
-            objectFit="cover"
-            onLoadingComplete={() => setLoading(false)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+        <div className={styles.header}>
+          {(movie.backdrop_path || movie.poster_path) && (
+            <Image
+              className={`${styles.backdrop} ${loading ? styles.loading : ""}`}
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
+              alt={movie.title || "Movie Backdrop"}
+              layout="fill"
+              objectFit="cover"
+              onLoadingComplete={() => setLoading(false)}
+            />
+          )}
+          <div className={styles.backdropOverlay} />
 
           {/* Top Controls */}
-          <div className="absolute top-6 right-6 flex gap-3">
+          <div className={styles.topControls}>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShow(false)}
-              className="p-3 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-white/10 transition shadow-xl"
+              className={styles.closeBtn}
             >
-              <MdClose className="text-2xl" />
+              <MdClose />
             </motion.button>
           </div>
 
           {/* Title & Primary Actions */}
-          <div className="absolute bottom-10 left-10 right-10">
+          <div className={styles.titleArea}>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl"
+              className={styles.title}
             >
               {movie.title}
             </motion.h1>
 
-            <div className="flex items-center gap-4">
+            <div className={styles.mainActions}>
               <button
                 onClick={() => setPlaying(true)}
-                className="btn-primary flex items-center gap-2 group"
+                className="btn-primary"
               >
-                <HiPlay className="text-2xl group-hover:scale-110 transition" />
+                <HiPlay className="text-2xl" />
                 Play Trailer
               </button>
-              <button className="btn-secondary flex items-center gap-2">
+              <button className="btn-secondary">
                 <HiPlus className="text-2xl" />
                 My List
               </button>
@@ -153,53 +166,53 @@ function Modal({ show, setShow, id }) {
         </div>
 
         {/* Info Grid */}
-        <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className={styles.infoGrid}>
           {/* Main Content */}
-          <div className="md:col-span-2 space-y-6">
-            <div className="flex items-center gap-4 text-sm font-medium">
-              <span className="text-green-500 font-bold">{Math.round(movie.vote_average * 10)}% Match</span>
-              <span className="text-gray-400">{movie.release_date?.split("-")[0]}</span>
-              <span className="px-1.5 py-0.5 border border-gray-600 text-[10px] text-gray-400 rounded uppercase">
+          <div className={styles.mainContent}>
+            <div className={styles.metaRow}>
+              <span className={styles.match}>{Math.round(movie.vote_average * 10)}% Match</span>
+              <span className={styles.year}>{movie.release_date?.split("-")[0]}</span>
+              <span className={styles.hdBadge}>
                 HD
               </span>
             </div>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-light">
+            <p className={styles.overview}>
               {movie?.overview}
             </p>
           </div>
 
           {/* Sidebar Meta */}
-          <div className="space-y-6 text-sm">
-            <div>
-              <span className="text-gray-500 block mb-1">Genres</span>
-              <p className="text-gray-200">
+          <div className={styles.sidebar}>
+            <div className={styles.sidebarItem}>
+              <span className={styles.sidebarLabel}>Genres</span>
+              <p className={styles.sidebarValue}>
                 {movie.genres?.map((g) => g.name).join(", ")}
               </p>
             </div>
-            <div>
-              <span className="text-gray-500 block mb-1">Release Date</span>
-              <p className="text-gray-200">{movie.release_date}</p>
+            <div className={styles.sidebarItem}>
+              <span className={styles.sidebarLabel}>Release Date</span>
+              <p className={styles.sidebarValue}>{movie.release_date}</p>
             </div>
-            <div>
-              <span className="text-gray-500 block mb-1">Original Language</span>
-              <p className="text-gray-200 uppercase">{movie.original_language}</p>
+            <div className={styles.sidebarItem}>
+              <span className={styles.sidebarLabel}>Original Language</span>
+              <p className={`${styles.sidebarValue} ${styles.uppercase}`}>{movie.original_language}</p>
             </div>
           </div>
         </div>
 
         {/* Video Player Section */}
         {playing && trailerId && (
-          <div className="fixed inset-0 z-[110] bg-black flex items-center justify-center p-4">
+          <div className={styles.playerOverlay}>
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               onClick={() => setPlaying(false)}
-              className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white z-[120]"
+              className={styles.playerCloseBtn}
             >
-              <MdClose className="text-2xl" />
+              <MdClose />
             </motion.button>
-            <div className="w-full h-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl">
+            <div className={styles.playerWrapper}>
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${trailerId}`}
                 width="100%"
@@ -212,8 +225,10 @@ function Modal({ show, setShow, id }) {
           </div>
         )}
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
+
 }
-// 
+
 export default Modal;

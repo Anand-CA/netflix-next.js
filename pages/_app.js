@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import { AnimatePresence } from "framer-motion";
