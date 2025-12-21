@@ -8,13 +8,20 @@ function Header() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        setShow(true);
-      } else {
-        setShow(false);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShow(window.scrollY > 100);
+          ticking = false;
+        });
+        ticking = true;
       }
-    });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
     <div

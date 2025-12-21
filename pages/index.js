@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
 import requests, { apiKey } from "../requests";
 import Navbar from "../components/Navbar";
@@ -24,10 +24,10 @@ export default function Home({
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const onMovieClick = (id) => {
+  const onMovieClick = useCallback((id) => {
     setModalId(id);
     setShowModal(true);
-  };
+  }, []);
 
   const handleSearch = async (query) => {
     setSearchQuery(query);

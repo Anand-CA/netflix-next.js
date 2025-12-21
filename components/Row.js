@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -128,4 +128,5 @@ function Row({ title, movies, big, onMovieClick }) {
   );
 }
 
-export default Row;
+export default React.memo(Row);
+

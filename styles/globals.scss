@@ -156,8 +156,8 @@ body {
 }
 
 .glass-pane {
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4) 10%, rgba(0, 0, 0, 0.8) 100%);
-    backdrop-filter: blur(24px);
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0.95) 100%);
+    // backdrop-filter removed for scroll performance - was blur(24px)
 }
 
 .custom-scrollbar::-webkit-scrollbar {
