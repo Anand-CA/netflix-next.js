@@ -93,7 +93,7 @@ function Modal({ show, setShow, id }) {
       exit={{ opacity: 0 }}
       ref={modalRef}
       onClick={closeModal}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto overflow-x-hidden pt-10 pb-10"
+      className="modal-scrollbar fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto overflow-x-hidden pt-10 pb-10"
     >
       <motion.div
         variants={dropIn}
