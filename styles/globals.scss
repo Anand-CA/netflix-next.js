@@ -7,7 +7,7 @@ html {
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    width: 7px;
+    width: 4px;
 }
 
 html::-webkit-scrollbar-track,
@@ -23,7 +23,7 @@ body::-webkit-scrollbar-thumb {
 
 html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
-    background: #e50914;
+    background: #fff;
 }
 
 body {
@@ -135,13 +135,13 @@ body {
     scrollbar-width: thin;
     scrollbar-color: rgba(229, 9, 20, 0.7) transparent;
 
-    &::-webkit-scrollbar { width: 7px; }
+    &::-webkit-scrollbar { width: 4px; }
     &::-webkit-scrollbar-track { background: transparent; }
     &::-webkit-scrollbar-thumb {
         background: rgba(229, 9, 20, 0.75);
         border-radius: 9999px;
     }
-    &::-webkit-scrollbar-thumb:hover { background: #e50914; }
+    &::-webkit-scrollbar-thumb:hover { background: #fff; }
 }
 
 .hero-gradient {
