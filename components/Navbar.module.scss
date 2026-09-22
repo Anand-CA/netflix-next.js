@@ -6,10 +6,12 @@
     width: 95%;
     max-width: 80rem;
     z-index: 50;
+    pointer-events: none;
     transition: all 0.3s ease;
 }
 
 .inner {
+    pointer-events: auto;
     border-radius: 9999px;
     padding: 0.75rem 1.5rem;
     display: flex;
