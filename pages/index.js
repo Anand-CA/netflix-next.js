@@ -90,7 +90,7 @@ export default function Home({
             <Hero movie={activeMovie} onPlay={() => onMovieClick(activeMovie?.id)} />
 
             {/* First Row */}
-            <div className="relative z-20 pb-12 pt-2">
+            <div className="relative z-20 pb-12 pt-2 custom-scrollbar">
               <Row onMovieClick={onMovieClick} title="Trending" movies={trending.results} />
             </div>
 
