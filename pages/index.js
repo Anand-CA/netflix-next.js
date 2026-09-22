@@ -69,8 +69,8 @@ export default function Home({
   return (
     <div className={styles.container}>
       <Head>
-        <title>Netflix - Premium</title>
-        <meta name="description" content="Premium Netflix Redesign" />
+        <title>Cineva - Premium Streaming</title>
+        <meta name="description" content="Cineva - Premium movie streaming experience" />
         <link rel="icon" href="/netflix-icon.svg" />
       </Head>
 
