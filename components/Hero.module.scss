@@ -40,7 +40,7 @@
     position: relative;
     z-index: 10;
     max-width: 56rem;
-    margin-top: -5rem; // Move content up to avoid overlap with Trending
+    transform: translateY(-5rem); // Shift content without affecting surrounding layout
 }
 
 .stack {
