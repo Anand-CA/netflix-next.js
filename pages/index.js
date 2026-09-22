@@ -87,10 +87,10 @@ export default function Home({
           </div>
         ) : (
           <>
-            <Hero movie={activeMovie} />
+            <Hero movie={activeMovie} onPlay={() => onMovieClick(activeMovie?.id)} />
 
-            {/* First Row: Integrated with Hero */}
-            <div className="relative z-20 -mt-72 md:-mt-96 pb-12">
+            {/* First Row */}
+            <div className="relative z-20 pb-12 pt-2">
               <Row onMovieClick={onMovieClick} title="Trending" movies={trending.results} />
             </div>
 
