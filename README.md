@@ -1,47 +1,69 @@
-# [LIVE DEMO](https://netflixclone-three.vercel.app/)
+# 🎬 Cineva
 
-![NetflixClone](https://i.ibb.co/BPGPH99/Screen-Shot-2021-07-11-at-4-37-40-PM.png)
+> 🍿 **A modern movie discovery & streaming UI built with Next.js**
 
-## About
-Not the ordinary Netflix clone that you'll find on internet. This one will extremely load faster because it uses server side rendering. This is my first project on next.js and hopping to built more with it. Due to some restrictions i couldn't add authentication and redux but will be adding it sooner. If you like this clone give it a start⭐️
+✨ Cineva is a polished Netflix-inspired movie experience focused on a clean, cinematic interface, smooth animations, responsive carousels, and fast server-side data fetching.
 
-## Technologies used 🚀
-* [Next.js](https://nextjs.org/)
-* [TailwindCss](https://tailwindcss.com/)
-* [TmdbApi](https://www.themoviedb.org/)
-* [Framer-motion](https://www.framer.com/)
+## 🌟 Highlights
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- 🎥 **Cinematic Hero Section** — dynamic trending movies with immersive backdrops
+- 🔥 **Trending Carousel** — browse popular movies in a smooth horizontal slider
+- 🎞️ **Multiple Movie Rows** — Action, Netflix Originals, Top Rated, Horror, Comedy, Romance & Documentaries
+- 🔎 **Movie Search** — quickly find movies using TMDB data
+- 🎬 **Movie Details Modal** — explore movie information without leaving the page
+- ✨ **Smooth Animations** — powered by Framer Motion
+- 📱 **Responsive Design** — optimized for desktop and mobile
+- ⚡ **Server-Side Data Fetching** — movie data is fetched efficiently with Next.js
+- 🌙 **Dark Cinematic UI** — glassmorphism, gradients and subtle visual effects
 
-## Getting Started
+## 🛠️ Tech Stack
 
-First, run the development server:
+- ⚛️ **Next.js 11**
+- ⚛️ **React 17**
+- 🎨 **SCSS**
+- ✨ **Framer Motion**
+- 🎬 **React Player**
+- 🖼️ **Next Image**
+- 🌐 **TMDB API**
+- 🎯 **Swiper**
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Anand-CA/netflix-next.js.git
+cd netflix-next.js
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open **http://localhost:3000** in your browser. 🍿
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🔐 Environment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Add your TMDB API configuration as required by the project.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 📸 Experience
 
-## Learn More
+Cineva is designed to feel like a premium streaming platform while showcasing modern frontend development skills:
 
-To learn more about Next.js, take a look at the following resources:
+**🎨 UI/UX · ⚡ Performance · 🎬 Animation · 📱 Responsive Design · 🔎 Search · 🌐 API Integration**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project is for educational and portfolio purposes.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+⭐ If you like Cineva, consider giving the repository a star!
