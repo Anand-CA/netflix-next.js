@@ -24,10 +24,10 @@
     z-index: 101;
 
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-color: #fff transparent;
 
     &::-webkit-scrollbar {
-        width: 6px;
+        width: 4px;
     }
 
     &::-webkit-scrollbar-track {
@@ -36,13 +36,13 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.24);
+        background: #fff;
         border-radius: 9999px;
         border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.45);
+        background: #fff;
     }
 }
 
