@@ -40,13 +40,14 @@
     position: relative;
     z-index: 10;
     max-width: 56rem;
-    transform: translateY(0); // Keep hero content clear of the floating navbar
-    padding-top: 5rem;
+    transform: none;
+    padding-top: 10vh;
+    padding-bottom: 8vh;
 }
 
 .stack {
     &>*+* {
-        margin-top: 1.5rem;
+        margin-top: 1.25rem;
     }
 }
 
@@ -118,7 +119,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
 }
 
 .glow {
