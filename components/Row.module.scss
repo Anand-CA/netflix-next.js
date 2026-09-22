@@ -10,8 +10,13 @@
     font-size: 1.25rem;
     margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.9);
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    @media (min-width: 768px) {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 
     @media (min-width: 640px) {
         font-size: 1.5rem;
@@ -20,7 +25,12 @@
 
 .swiper {
     overflow: visible !important;
-    padding: 0 2% !important;
+    padding: 0 1.5rem !important;
+
+    @media (min-width: 768px) {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+    }
 
     :global(.swiper-button-next),
     :global(.swiper-button-prev) {
