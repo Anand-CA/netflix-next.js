@@ -40,7 +40,8 @@
     position: relative;
     z-index: 10;
     max-width: 56rem;
-    transform: translateY(-5rem); // Shift content without affecting surrounding layout
+    transform: translateY(0); // Keep hero content clear of the floating navbar
+    padding-top: 5rem;
 }
 
 .stack {
