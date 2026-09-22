@@ -36,6 +36,33 @@
   }
 }
 
+html,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(229, 9, 20, 0.7) transparent;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 7px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(229, 9, 20, 0.75);
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
+
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: rgba(229, 9, 20, 0.7) transparent;
