@@ -35,11 +35,11 @@
 .trendingWrapper {
     position: relative;
     z-index: 20;
-    margin-top: -18rem;
-    padding-bottom: 3rem;
+    margin-top: -22vh;
+    padding-bottom: 1.5rem;
 
     @media (min-width: 768px) {
-        margin-top: -24rem;
+        margin-top: -28vh;
     }
 }
 
